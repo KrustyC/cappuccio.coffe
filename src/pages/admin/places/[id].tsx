@@ -33,9 +33,9 @@ const Edit: React.FC<React.PropsWithChildren<EditProps>> = ({ id }) => {
     error: updateError,
   } = useNetlifyPutFunction<{ place: Place }>({ user });
 
-  const onEditPlace = async (updatedPlace: Place) => {
+  const onEditPlace = async (updatedPlace: Place | Omit<Place, "_id">) => {
     const res = await onUpdate(`/admin-places?id=${id}`, {
-      place: updatedPlace,
+      place: { _id: id, ...updatedPlace },
     });
 
     if (res !== undefined) {

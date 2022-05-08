@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 import { connect } from "../shared/mongodb-client";
 import { HTTP_METHODS } from "../shared/constants";
 
-const PROJECTS_COLLECTION = "projects";
+const PLACES_COLLECTION = "places";
 
 async function get(event: HandlerEvent) {
   try {
@@ -16,12 +16,12 @@ async function get(event: HandlerEvent) {
     const { id } = event.queryStringParameters as { id?: string };
 
     if (id) {
-      const project = await client
+      const place = await client
         .db(process.env.MONGO_DB_NAME)
-        .collection(PROJECTS_COLLECTION)
+        .collection(PLACES_COLLECTION)
         .findOne({ _id: new ObjectId(id) });
 
-      if (!project) {
+      if (!place) {
         return jsonResponse({
           status: 404,
           body: {
@@ -32,29 +32,25 @@ async function get(event: HandlerEvent) {
 
       return jsonResponse({
         status: 200,
-        body: { project },
+        body: { place },
       });
     }
 
-    const projects = await client
+    const places = await client
       .db(process.env.MONGO_DB_NAME)
-      .collection(PROJECTS_COLLECTION)
+      .collection(PLACES_COLLECTION)
       .find()
       .toArray();
 
-    // projects.sort((a, b) =>
-    //   a.order > b.order ? 1 : b.order > a.order ? -1 : 0
-    // );
-
     return jsonResponse({
       status: 200,
-      body: { projects: [] },
+      body: { places },
     });
   } catch (error) {
     return jsonResponse({
       status: 500,
       body: {
-        message: "Error fetching projects, please try again later on.",
+        message: "Error fetching places, please try again later on.",
       },
     });
   }

@@ -8,6 +8,7 @@ interface Coordinates {
 interface Marker {
   id: string;
   coordinates: Coordinates;
+  popup?: React.ReactNode;
 }
 
 interface MapProps {
@@ -40,9 +41,9 @@ const Map: React.FC<React.PropsWithChildren<MapProps>> = ({
   return (
     <MapContainer
       className={className}
+      scrollWheelZoom
       center={[center.lat, center.lng]}
       zoom={zoom}
-      scrollWheelZoom={false}
     >
       <ChangeView center={[center.lat, center.lng]} zoom={zoom} />
 
@@ -55,7 +56,9 @@ const Map: React.FC<React.PropsWithChildren<MapProps>> = ({
         <Marker
           key={marker.id}
           position={[marker.coordinates.lat, marker.coordinates.lng]}
-        />
+        >
+          {marker.popup || null}
+        </Marker>
       ))}
     </MapContainer>
   );

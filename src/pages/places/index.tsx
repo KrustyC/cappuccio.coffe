@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 
-const DynamicPlacesMap = dynamic(() => import("@/components/CappuccinosMap"), {
+const DynamicPlacesMap = dynamic(() => import("@/components/PlacesMap"), {
   ssr: false,
 });
 

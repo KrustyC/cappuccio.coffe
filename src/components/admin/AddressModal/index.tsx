@@ -83,11 +83,11 @@ const AddressModal: React.FC<React.PropsWithChildren<AddressModalProps>> = ({
           </div>
         ) : (
           <div className="flex mt-6">
-            <div className="w-1/2 grid grid-cols-1 gap-4 pr-8 w-full max-h-[490px] overflow-scroll">
+            <div className="w-1/2 flex flex-col pr-8 w-full max-h-[490px] overflow-scroll">
               {suggestedPlaces.map((place) => (
                 <div
                   key={uuidv4()}
-                  className={`p-4 cursor-pointer h-20 border-2 border-[#0DB082] rounded-lg ${
+                  className={`p-4 cursor-pointer h-20 border-2 mb-4 border-[#0DB082] rounded-lg ${
                     place.address === selectedAddress?.address
                       ? "bg-[#5CE3BE]"
                       : ""

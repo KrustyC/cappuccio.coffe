@@ -6,7 +6,7 @@ export enum REST_METHOD {
 }
 
 export type Place = {
-  _id?: string;
+  _id: string;
   name: string;
   address: Address;
   description: string;

@@ -13,7 +13,7 @@ interface PlaceFormProps {
   className?: string;
   place?: Place;
   pending?: boolean;
-  onSavePlace: (place: Place) => void;
+  onSavePlace: (place: Omit<Place, "_id">) => void;
 }
 
 const DEFAULT_CAPPUCCINO: Partial<Place> = {

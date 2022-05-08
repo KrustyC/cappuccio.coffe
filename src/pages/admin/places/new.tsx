@@ -17,9 +17,9 @@ const AdminPlacesCreate: NextPageWithLayout<undefined> = () => {
     onCreate,
     pending,
     error: updateError,
-  } = useNetlifyPostFunction<{ place: Place }>({ user });
+  } = useNetlifyPostFunction<{ place: Omit<Place, "_id"> }>({ user });
 
-  const onCreatePlace = async (place: Place) => {
+  const onCreatePlace = async (place: Omit<Place, "_id">) => {
     const res = await onCreate(`/admin-places`, { place });
 
     if (res !== undefined) {
