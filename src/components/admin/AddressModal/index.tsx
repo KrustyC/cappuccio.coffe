@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { MapContainer, Marker, useMap, TileLayer } from "react-leaflet";
+import { v4 as uuidv4 } from "uuid";
 
 import { Modal } from "../Modal";
 import { LoadingSpinner } from "../LoadingSpinner";
@@ -36,8 +37,7 @@ const AddressModal: React.FC<React.PropsWithChildren<AddressModalProps>> = ({
     currentAddress?.address || ""
   );
 
-  const { suggestedPlaces, onSearch, loading, error } =
-    useRetrieveAddressForward();
+  const { suggestedPlaces, onSearch, loading } = useRetrieveAddressForward();
 
   const onConfirmChoice = () => {
     onChangeAddress(selectedAddress!);
@@ -47,8 +47,8 @@ const AddressModal: React.FC<React.PropsWithChildren<AddressModalProps>> = ({
     setSelectedAddress(place);
   };
 
-  const onChangeAddressInput = (e: React.SyntheticEvent) => {
-    setAddressInput((e.target as any).value);
+  const onChangeAddressInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAddressInput(e.target.value);
   };
 
   return (
@@ -86,6 +86,7 @@ const AddressModal: React.FC<React.PropsWithChildren<AddressModalProps>> = ({
             <div className="w-1/2 grid grid-cols-1 gap-4 pr-8 w-full max-h-[490px] overflow-scroll">
               {suggestedPlaces.map((place) => (
                 <div
+                  key={uuidv4()}
                   className={`p-4 cursor-pointer h-20 border-2 border-[#0DB082] rounded-lg ${
                     place.address === selectedAddress?.address
                       ? "bg-[#5CE3BE]"

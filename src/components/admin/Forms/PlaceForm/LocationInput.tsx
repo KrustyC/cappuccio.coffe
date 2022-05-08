@@ -30,13 +30,13 @@ export const LocationInput: React.FC<LocationInputProps> = ({
     setShowModal(false);
   };
 
-  const onChangeAddressText = (e: React.SyntheticEvent) => {
+  const onChangeAddressText = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChangeAddress({
       coordinates: {
         lat: currentAddress?.coordinates.lat || 0,
         lng: currentAddress?.coordinates.lng || 0,
       },
-      address: (e.target as any).value as string,
+      address: e.target.value as string,
     });
   };
 

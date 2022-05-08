@@ -120,23 +120,13 @@ export const PlaceForm: React.FC<React.PropsWithChildren<PlaceFormProps>> = ({
             control={control}
             name="address"
             rules={{ validate: isValidAddress }}
-            render={({ field: { value, onChange, onBlur } }) => (
+            render={({ field: { value, onChange } }) => (
               <LocationInput
                 currentAddress={value}
                 onChangeAddress={onChange}
               />
             )}
           />
-
-          {/* <Input
-            register={register}
-            options={{ required: "Please add a name" }}
-            error={errors.name}
-            label="Name"
-            name="name"
-            type="text"
-            placeholder="Place Name"
-          /> */}
         </div>
 
         <div className="mb-4">
