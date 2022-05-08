@@ -10,8 +10,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="bg-primary w-screen">
-        <div className="w-screen xl:max-w-screen-lg m-auto flex flex-col">
+      <div className="w-screen">
+        <div className="w-screen h-screen m-auto flex flex-col items-center justify-center">
           This is the amazing cappuccino{"'"}s blog
         </div>
       </div>
