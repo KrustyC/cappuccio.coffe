@@ -60,7 +60,7 @@ export const LocationInput: React.FC<LocationInputProps> = ({
             </span>
 
             <DynamicMap
-              className="z-0 h-[250px] w-[400px] mt-4"
+              className="z-0 h-[250px] w-full md:w-[400px] mt-4"
               center={currentAddress.coordinates}
               markers={[
                 { id: uuidv4(), coordinates: currentAddress.coordinates },

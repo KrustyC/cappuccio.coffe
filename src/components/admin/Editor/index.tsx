@@ -40,7 +40,7 @@ export const Editor: React.FC<React.PropsWithChildren<EditorProps>> = ({
       {editor && <BubbleMenu editor={editor} />}
 
       <div
-        className={`editor-container min-h-full h-32 shadow appearance-none border ${
+        className={`editor-container min-h-full h-80 md:h-32 shadow appearance-none border ${
           error ? "border-red-500" : ""
         } rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
       >

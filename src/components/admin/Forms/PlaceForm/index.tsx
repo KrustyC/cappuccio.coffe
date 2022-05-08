@@ -142,7 +142,7 @@ export const PlaceForm: React.FC<React.PropsWithChildren<PlaceFormProps>> = ({
 
       <div className="flex items-center border-t-2 border-slate-300 pt-4 h-24">
         <button
-          className="btn-admin btn-primary mr-4"
+          className="btn-admin btn-primary mr-4 w-full md:w-40"
           type="submit"
           disabled={pending || !isValid || !isDirty}
         >

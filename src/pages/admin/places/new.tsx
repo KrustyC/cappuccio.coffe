@@ -43,7 +43,7 @@ const AdminPlacesCreate: NextPageWithLayout<undefined> = () => {
       </div>
 
       <div className="flex justify-between w-100 mt-4">
-        <Panel className="mr-4 w-full">
+        <Panel className="md:mr-4 w-full">
           <PlaceForm pending={pending} onSavePlace={onCreatePlace} />
         </Panel>
       </div>

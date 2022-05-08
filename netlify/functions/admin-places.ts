@@ -172,10 +172,10 @@ async function put(client: MongoClient, handlerEvent: HandlerEvent) {
         },
         {
           $set: {
-            title: placeDocument.title,
-            intro: placeDocument.intro,
+            name: placeDocument.name,
             description: placeDocument.description,
             images: placeDocument.images,
+            address: placeDocument.address,
             updatedAt: new Date(),
           },
         }
@@ -186,6 +186,7 @@ async function put(client: MongoClient, handlerEvent: HandlerEvent) {
       body: { message: "Project successfully updated" },
     });
   } catch (error) {
+    console.log(error);
     return jsonResponse({
       status: 500,
       body: {
