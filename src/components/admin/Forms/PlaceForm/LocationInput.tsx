@@ -1,12 +1,9 @@
 import { useState } from "react";
 import { Address } from "@/types/global";
 import { v4 as uuidv4 } from "uuid";
-
 import dynamic from "next/dynamic";
 
-const DynamicAddressModal = dynamic(() => import("../../AddressModal"), {
-  ssr: false,
-});
+import { AddressModal } from "../../AddressModal";
 
 const DynamicMap = dynamic(() => import("@/components/Map"), {
   ssr: false,
@@ -87,7 +84,7 @@ export const LocationInput: React.FC<LocationInputProps> = ({
       </button>
 
       {showModal && (
-        <DynamicAddressModal
+        <AddressModal
           currentAddress={currentAddress}
           onChangeAddress={onConfirm}
           onCancel={onCancel}

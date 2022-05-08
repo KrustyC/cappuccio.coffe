@@ -14,7 +14,7 @@ export function useRetrieveAddressForward() {
   const [error, setError] = useState<Error>();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const retrieveAddress = async () => {
       setLoading(true);
       setError(undefined);
 
@@ -34,8 +34,8 @@ export function useRetrieveAddressForward() {
       }
     };
 
-    if (user) {
-      fetchData();
+    if (user && searchAddress.length > 5) {
+      retrieveAddress();
     }
   }, [searchAddress]);
 

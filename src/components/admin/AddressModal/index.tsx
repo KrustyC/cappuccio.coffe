@@ -1,37 +1,24 @@
 import { useState } from "react";
-import { MapContainer, Marker, useMap, TileLayer } from "react-leaflet";
 import { v4 as uuidv4 } from "uuid";
+import dynamic from "next/dynamic";
+import { Address } from "@/types/global";
 
 import { Modal } from "../Modal";
 import { LoadingSpinner } from "../LoadingSpinner";
-import { Address } from "@/types/global";
 import { useRetrieveAddressForward } from "./useRetrieveAddressForward";
 
+const DynamicMap = dynamic(() => import("@/components/Map"), {
+  ssr: false,
+});
 interface AddressModalProps {
   currentAddress?: Address;
   onChangeAddress: (selectedAddress: Address) => void;
   onCancel: VoidFunction;
 }
 
-function ChangeView({
-  center,
-  zoom,
-}: {
-  center: [number, number];
-  zoom: number;
-}) {
-  const map = useMap();
-
-  map.setView(center, zoom);
-
-  return null;
-}
-
-const AddressModal: React.FC<React.PropsWithChildren<AddressModalProps>> = ({
-  currentAddress,
-  onChangeAddress,
-  onCancel,
-}) => {
+export const AddressModal: React.FC<
+  React.PropsWithChildren<AddressModalProps>
+> = ({ currentAddress, onChangeAddress, onCancel }) => {
   const [selectedAddress, setSelectedAddress] = useState<Address>();
   const [addressInput, setAddressInput] = useState(
     currentAddress?.address || ""
@@ -45,6 +32,13 @@ const AddressModal: React.FC<React.PropsWithChildren<AddressModalProps>> = ({
 
   const onSelectPlace = (place: Address) => {
     setSelectedAddress(place);
+  };
+
+  const onHandleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      onSearch(addressInput);
+    }
   };
 
   const onChangeAddressInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,6 +56,7 @@ const AddressModal: React.FC<React.PropsWithChildren<AddressModalProps>> = ({
             className="w-full border-2 p-3 border-admin-primary rounded-lg"
             type="text"
             name="address"
+            onKeyDown={onHandleKeyDown}
             value={addressInput}
             onChange={onChangeAddressInput}
           />
@@ -100,37 +95,20 @@ const AddressModal: React.FC<React.PropsWithChildren<AddressModalProps>> = ({
             </div>
 
             <div className="w-1/2 h-full">
-              <MapContainer
+              <DynamicMap
                 className="h-[490px]"
-                center={[
-                  selectedAddress?.coordinates.lat || 51.505,
-                  selectedAddress?.coordinates.lng || -0.09,
-                ]}
-                zoom={13}
-                scrollWheelZoom={false}
-              >
-                <ChangeView
-                  center={[
-                    selectedAddress?.coordinates.lat || 51.505,
-                    selectedAddress?.coordinates.lng || -0.09,
-                  ]}
-                  zoom={13}
-                />
-
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-
-                {selectedAddress && (
-                  <Marker
-                    position={[
-                      selectedAddress.coordinates.lat,
-                      selectedAddress.coordinates.lng,
-                    ]}
-                  />
-                )}
-              </MapContainer>
+                center={selectedAddress?.coordinates}
+                markers={
+                  selectedAddress?.coordinates
+                    ? [
+                        {
+                          id: uuidv4(),
+                          coordinates: selectedAddress.coordinates,
+                        },
+                      ]
+                    : []
+                }
+              />
             </div>
           </div>
         )}
@@ -138,8 +116,7 @@ const AddressModal: React.FC<React.PropsWithChildren<AddressModalProps>> = ({
 
       <div className="flex justify-end mt-4">
         <button className="btn-admin" onClick={onCancel}>
-          {" "}
-          Close{" "}
+          Close
         </button>
 
         <button
@@ -152,5 +129,3 @@ const AddressModal: React.FC<React.PropsWithChildren<AddressModalProps>> = ({
     </Modal>
   );
 };
-
-export default AddressModal;

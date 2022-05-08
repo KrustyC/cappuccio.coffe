@@ -1,4 +1,6 @@
-import { MapContainer, Marker, useMap, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, useMap, TileLayer, Popup } from "react-leaflet";
+
+// import { cappuccinoMarkerIcon } from "./icons";
 
 interface Coordinates {
   lat: number;
@@ -40,7 +42,7 @@ const Map: React.FC<React.PropsWithChildren<MapProps>> = ({
 }) => {
   return (
     <MapContainer
-      className={className}
+      className={`${className} map`}
       scrollWheelZoom
       center={[center.lat, center.lng]}
       zoom={zoom}
@@ -48,16 +50,17 @@ const Map: React.FC<React.PropsWithChildren<MapProps>> = ({
       <ChangeView center={[center.lat, center.lng]} zoom={zoom} />
 
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
       />
 
       {markers.map((marker) => (
         <Marker
           key={marker.id}
+          // icon={cappuccinoMarkerIcon}
           position={[marker.coordinates.lat, marker.coordinates.lng]}
         >
-          {marker.popup || null}
+          {marker.popup ? <Popup>{marker.popup}</Popup> : null}
         </Marker>
       ))}
     </MapContainer>
