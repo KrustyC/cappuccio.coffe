@@ -28,7 +28,7 @@ export const MultipleImagesInput: React.FC<
   return (
     <div className="flex flex-col items-start justify-start">
       {images.length > 0 ? (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {images.map(({ image }) => (
             // eslint-disable-next-line @next/next/no-img-element
             <ImageFrame key={image} image={image} />

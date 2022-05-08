@@ -46,12 +46,12 @@ export const AddressModal: React.FC<
   };
 
   return (
-    <Modal>
+    <Modal width="w-screen md:w-7/12">
       <div className="w-full flex flex-col">
         <h2 className="text-2xl text-admin-primary font-bold py-4">
           Choose place
         </h2>
-        <div className="mt-2 flex items-center">
+        <div className="mt-2 flex flex-col md:flex-row items-center">
           <input
             className="w-full border-2 p-3 border-admin-primary rounded-lg"
             type="text"
@@ -63,7 +63,7 @@ export const AddressModal: React.FC<
 
           <button
             type="button"
-            className="btn-admin btn-primary ml-4"
+            className="btn-admin btn-primary mt-4 md:mt-0 md:ml-4 w-full"
             onClick={() => onSearch(addressInput)}
           >
             Search
@@ -77,12 +77,12 @@ export const AddressModal: React.FC<
             <LoadingSpinner />
           </div>
         ) : (
-          <div className="flex mt-6">
-            <div className="w-1/2 flex flex-col pr-8 w-full max-h-[490px] overflow-scroll">
+          <div className="flex flex-col mt-6">
+            <div className="md:w-1/2 flex flex-col mpr-8 w-full max-h-[490px] overflow-scroll">
               {suggestedPlaces.map((place) => (
                 <div
                   key={uuidv4()}
-                  className={`p-4 cursor-pointer h-20 border-2 mb-4 border-[#0DB082] rounded-lg ${
+                  className={`p-4 mb-4 cursor-pointer h-20 border-2 -[#0DB082] rounded-lg ${
                     place.address === selectedAddress?.address
                       ? "bg-[#5CE3BE]"
                       : ""
@@ -94,7 +94,7 @@ export const AddressModal: React.FC<
               ))}
             </div>
 
-            <div className="w-1/2 h-full">
+            <div className="md:w-1/2 h-full">
               <DynamicMap
                 className="h-[490px]"
                 center={selectedAddress?.coordinates}

@@ -25,7 +25,7 @@ export const AdminLayout: React.FC<React.PropsWithChildren<unknown>> = ({
 
           <div
             id="main-content"
-            className="h-screen w-full bg-admin-grey relative overflow-y-auto lg:ml-64 p-4"
+            className="h-screen w-full bg-admin-grey relative overflow-y-auto mb-24 md:mb-0 lg:ml-64 md:p-4"
           >
             {children}
           </div>

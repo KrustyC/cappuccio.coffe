@@ -78,10 +78,10 @@ export const PlaceForm: React.FC<React.PropsWithChildren<PlaceFormProps>> = ({
 
   return (
     <form
-      className="flex flex-col w-9/12"
+      className="flex flex-col w-full md:w-9/12"
       onSubmit={handleSubmit((data) => onSubmit(data))}
     >
-      <div className="flex  flex-col w-full mb-8">
+      <div className="flex flex-col w-full mb-8">
         <div className="mb-4">
           <Input
             register={register}

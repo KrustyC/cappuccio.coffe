@@ -16,7 +16,7 @@ export const ImageFrame: React.FC<React.PropsWithChildren<ImageFrameProps>> = ({
     }`}
   >
     <div className={styles["img-container"]}>
-      <img src={image} width="100%" height="20px" alt="image" />
+      <img src={image} width="100%" alt="image" />
     </div>
   </div>
 );

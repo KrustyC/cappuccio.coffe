@@ -40,6 +40,12 @@
 
 .img-container > img {
   width: 100%;
-  height: 150px;
+  height: 100%;
   object-fit: contain;
+}
+
+@media screen and (min-width: 768px) {
+  .img-container > img {
+    height: 150px;
+  }
 }
