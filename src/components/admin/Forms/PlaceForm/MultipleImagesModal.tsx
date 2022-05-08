@@ -34,14 +34,25 @@ export const MultipleImagesModal: React.FC<
     onConfirm(selectedImages);
   };
 
-  const onChooseImage = (image: string) => {
-    setSelectedImages([...selectedImages, { image }]);
+  const onClickImage = (image: string, isImageSelected: boolean) => {
+    if (!isImageSelected) {
+      setSelectedImages([...selectedImages, { image }]);
+      return;
+    }
+
+    const filteredImages = selectedImages.filter(
+      (selectedImage) => selectedImage.image !== image
+    );
+
+    setSelectedImages(filteredImages);
   };
+
+  console.log(allImages, selectedImages);
 
   return (
     <Modal>
-      <div className="w-full flex justify-center">
-        <div className="text-left px-5 flex-auto w-1/2">
+      <div className="w-full flex flex-col">
+        <div className="text-left px-5 w-2/3 flex-auto ">
           <h2 className="text-2xl text-admin-primary font-bold py-4">
             Choose images
           </h2>
@@ -56,7 +67,7 @@ export const MultipleImagesModal: React.FC<
           </p>
         </div>
 
-        <div className="h-[500px] max-h-[500px] w-2/3 overflow-scroll pb-4">
+        <div className="h-[500px] max-h-[500px]  overflow-scroll pb-4">
           {loading ? (
             <div className="h-24 flex align-center justify-center">
               <LoadingSpinner />
@@ -73,7 +84,7 @@ export const MultipleImagesModal: React.FC<
                     <button
                       type="button"
                       className="btn-admin btn-outlined-primary btn-sm absolute bottom-2 right-2"
-                      onClick={() => onChooseImage(image)}
+                      onClick={() => onClickImage(image, isImageSelected)}
                     >
                       {isImageSelected ? "Remove" : "Choose"}
                     </button>
