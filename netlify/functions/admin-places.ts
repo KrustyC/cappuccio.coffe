@@ -186,7 +186,6 @@ async function put(client: MongoClient, handlerEvent: HandlerEvent) {
       body: { message: "Project successfully updated" },
     });
   } catch (error) {
-    console.log(error);
     return jsonResponse({
       status: 500,
       body: {

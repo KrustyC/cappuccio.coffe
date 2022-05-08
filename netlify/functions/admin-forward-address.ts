@@ -1,6 +1,6 @@
 import { Handler, HandlerEvent } from "@netlify/functions";
 import axios from "axios";
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient } from "mongodb";
 import { adminHandler } from "../shared/admin-handler";
 import { jsonResponse } from "../shared/utils";
 import { OPENCAGE_BASE_ENDPOINT, HTTP_METHODS } from "../shared/constants";
@@ -29,8 +29,6 @@ async function get(client: MongoClient, handlerEvent: HandlerEvent) {
     };
 
     const res = await axios.get(url, options);
-
-    console.log(res.data?.results);
 
     const places =
       res.data?.results?.map(({ geometry, formatted }) => {

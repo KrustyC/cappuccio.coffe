@@ -18,7 +18,6 @@ export function useNetlifyGetFunction<T>({
   user,
 }: UseNetlifyFunctionProps): UseNetlifyFunctionReturn<T> {
   const [data, setData] = useState<T | undefined>();
-  console.log("CIAO");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error>();
 
@@ -28,8 +27,6 @@ export function useNetlifyGetFunction<T>({
       setError(undefined);
 
       try {
-        console.log("PERFORM");
-
         const url = `${process.env.baseUrl}/.netlify/functions${fetchUrlPath}`;
         const options = {
           token: user?.token?.access_token,
@@ -39,7 +36,6 @@ export function useNetlifyGetFunction<T>({
 
         setData(response);
       } catch (e) {
-        console.log("ERRROR", error);
         setError(e as Error);
       } finally {
         setLoading(false);

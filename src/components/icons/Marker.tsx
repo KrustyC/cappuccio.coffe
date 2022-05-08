@@ -1,15 +1,13 @@
 interface MarkerIconProps {
-  height?: string;
-  width?: string;
+  className?: string;
 }
 
 export const MarkerIcon: React.FC<React.PropsWithChildren<MarkerIconProps>> = ({
-  height = "h-6",
-  width = "w-6",
+  className = "h-6 w-6",
 }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className={`${height} ${width}`}
+    className={className}
     viewBox="0 0 20 20"
     fill="currentColor"
   >

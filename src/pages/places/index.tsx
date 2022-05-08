@@ -1,10 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import dynamic from "next/dynamic";
-
-const DynamicPlacesMap = dynamic(() => import("@/components/PlacesMap"), {
-  ssr: false,
-});
+import { PlacesMap } from "@/components/PlacesMap";
 
 const PlacesPage: NextPage = () => {
   return (
@@ -16,7 +12,7 @@ const PlacesPage: NextPage = () => {
       </Head>
 
       <div className="w-screen">
-        <DynamicPlacesMap />
+        <PlacesMap />
       </div>
     </div>
   );

@@ -30,7 +30,6 @@ export const Editor: React.FC<React.PropsWithChildren<EditorProps>> = ({
     ],
     content: value,
     onUpdate({ editor }) {
-      console.log(editor.getHTML());
       onChange(editor.getHTML());
     },
   });

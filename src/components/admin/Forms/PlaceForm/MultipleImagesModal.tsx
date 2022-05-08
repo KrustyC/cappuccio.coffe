@@ -47,8 +47,6 @@ export const MultipleImagesModal: React.FC<
     setSelectedImages(filteredImages);
   };
 
-  console.log(allImages, selectedImages);
-
   return (
     <Modal width="w:-screen w:-7/12">
       <div className="w-full flex flex-col">

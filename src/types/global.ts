@@ -22,12 +22,14 @@ export type FormPlaceImage = {
   image: string;
 };
 
+export type Coordinates = {
+  lat: number;
+  lng: number;
+};
+
 export type Address = {
   address: string;
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
+  coordinates: Coordinates;
 };
 
 export type FormPlace = {
