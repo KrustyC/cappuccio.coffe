@@ -14,7 +14,7 @@ export const NavBar: React.FC<React.PropsWithChildren<NavBarProps>> = ({
             style={{ zIndex: "500" }}
           >
             <span className="self-center font-semibold whitespace-nowrap text-gray-800 ml-1">
-              cappuccino.coffee
+              cappucco.coffee
             </span>
             <span className="self-center font-semibold text-sm whitespace-nowrap text-gray-500 ml-1">
               / Admin Panel

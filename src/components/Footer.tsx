@@ -55,7 +55,7 @@ export const Footer: React.FC<React.PropsWithChildren<unknown>> = () => {
       </div>
 
       <div className="px-8 text-xs text-gray-400 border-t-[1px] border-gray-200 py-6">
-        © cappuccino.coffee 2020. All rights reserved.
+        © cappucco.coffee 2020. All rights reserved.
       </div>
     </div>
   );

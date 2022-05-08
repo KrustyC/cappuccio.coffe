@@ -6,14 +6,32 @@ import { jsonResponse } from "../shared/utils";
 import { HTTP_METHODS } from "../shared/constants";
 
 export const placeSchema = yup.object().shape({
-  title: yup.string().required("please enter a name for the place"),
-  intro: yup.string().required("please enter an intro for the place"),
+  name: yup.string().required("please enter a name for the place"),
   description: yup
     .string()
     .required("please enter a description for the place"),
   images: yup
     .array()
     .of(yup.string().required("please enter an image for the place")),
+  address: yup
+    .object()
+    .shape({
+      address: yup
+        .string()
+        .required("please enter an address string for the place"),
+      coordinates: yup
+        .object()
+        .shape({
+          lat: yup
+            .number()
+            .required("please enter address.coordinates.lat for the place"),
+          lng: yup
+            .number()
+            .required("please enter address.coordinates.lng for the place"),
+        })
+        .required("please enter an address for the place"),
+    })
+    .required("please enter an address for the place"),
 });
 
 const PLACES_COLLECTION = "places";
