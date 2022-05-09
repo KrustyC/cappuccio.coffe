@@ -2,7 +2,11 @@ import { Handler, HandlerEvent } from "@netlify/functions";
 import { MongoClient, ObjectId } from "mongodb";
 import * as yup from "yup";
 import { adminHandler } from "../shared/admin-handler";
-import { jsonResponse } from "../shared/utils";
+import {
+  jsonResponse,
+  mapApiAddressToDBAddress,
+  mapDBAddressToApiAddress,
+} from "../shared/utils";
 import { HTTP_METHODS } from "../shared/constants";
 
 export const placeSchema = yup.object().shape({
@@ -57,7 +61,12 @@ async function get(client: MongoClient, handlerEvent: HandlerEvent) {
 
       return jsonResponse({
         status: 200,
-        body: { place },
+        body: {
+          place: {
+            ...place,
+            address: mapDBAddressToApiAddress(place.address),
+          },
+        },
       });
     }
 
@@ -69,9 +78,15 @@ async function get(client: MongoClient, handlerEvent: HandlerEvent) {
 
     return jsonResponse({
       status: 200,
-      body: { places },
+      body: {
+        places: places.map((place) => ({
+          ...place,
+          address: mapDBAddressToApiAddress(place.address),
+        })),
+      },
     });
   } catch (error) {
+    console.error(error);
     return jsonResponse({
       status: 500,
       body: {
@@ -109,6 +124,7 @@ async function post(client: MongoClient, handlerEvent: HandlerEvent) {
       .collection(PLACES_COLLECTION)
       .insertOne({
         ...placeDocument,
+        address: mapApiAddressToDBAddress(placeDocument.address),
         createdAt: new Date(),
         updatedAt: new Date(),
       });
@@ -175,7 +191,7 @@ async function put(client: MongoClient, handlerEvent: HandlerEvent) {
             name: placeDocument.name,
             description: placeDocument.description,
             images: placeDocument.images,
-            address: placeDocument.address,
+            address: mapApiAddressToDBAddress(placeDocument.address),
             updatedAt: new Date(),
           },
         }

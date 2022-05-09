@@ -1,9 +1,9 @@
 import { Handler, HandlerEvent } from "@netlify/functions";
-import axios from "axios";
 import { MongoClient } from "mongodb";
 import { adminHandler } from "../shared/admin-handler";
 import { jsonResponse } from "../shared/utils";
-import { OPENCAGE_BASE_ENDPOINT, HTTP_METHODS } from "../shared/constants";
+import { fetchAddressesFromForwardAddress } from "../lib/geocode-api";
+import { HTTP_METHODS } from "../shared/constants";
 
 async function get(client: MongoClient, handlerEvent: HandlerEvent) {
   const { address } = handlerEvent.queryStringParameters as {
@@ -20,27 +20,11 @@ async function get(client: MongoClient, handlerEvent: HandlerEvent) {
   }
 
   try {
-    const url = `${OPENCAGE_BASE_ENDPOINT}/forward`;
-    const options = {
-      params: {
-        key: process.env.GEOCODING_API_KEY,
-        q: address,
-      },
-    };
-
-    const res = await axios.get(url, options);
-
-    const places =
-      res.data?.results?.map(({ geometry, formatted }) => {
-        return {
-          address: formatted,
-          coordinates: geometry,
-        };
-      }) || [];
+    const addresses = await fetchAddressesFromForwardAddress(address);
 
     return jsonResponse({
       status: 200,
-      body: { places },
+      body: { addresses },
     });
   } catch (error) {
     return jsonResponse({

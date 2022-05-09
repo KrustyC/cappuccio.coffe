@@ -50,7 +50,9 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   if (pageProps.protected && !user) {
     return (
       <div className="h-screen flex flex-col items-center justify-center bg-admin-grey text-gray-700">
-        <h1 className="text-gray-400 font-bold">cappuccio.coffee</h1>
+        <h1 className="text-4xl md:text-6xl text-gray-400 font-bold">
+          cappuccio.coffee
+        </h1>
 
         <button
           className="px-4 py-3 rounded-md mt-8 font-bold bg-gray-800 text-white"

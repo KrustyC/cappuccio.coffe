@@ -18,7 +18,7 @@ type FetchOptions = {
 
 export async function fetchJson<Body>(
   url: string,
-  { method = REST_METHOD.GET, token, body }: Options<Body>
+  { method = REST_METHOD.GET, token, body }: Options<Body> = {}
 ) {
   const headers: Headers = {
     "Content-Type": "application/json",

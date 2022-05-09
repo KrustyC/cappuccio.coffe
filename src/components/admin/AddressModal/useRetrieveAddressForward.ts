@@ -26,7 +26,7 @@ export function useRetrieveAddressForward() {
 
         const response = await fetchJson(url, options);
 
-        setSuggestedPlaces(response.places);
+        setSuggestedPlaces(response.addresses);
       } catch (e) {
         setError(e as Error);
       } finally {
