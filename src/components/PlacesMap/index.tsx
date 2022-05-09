@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 
 import { usePlacesMap } from "./usePlacesMap";
 import { SearchBar } from "./SearchBar";
+import { UserLocationInput } from "./UserLocationInput";
 
 const DynamicMap = dynamic(() => import("@/components/Map"), {
   ssr: false,
@@ -27,10 +28,11 @@ export const PlacesMap = () => {
       />
 
       <div className="absolute flex top-[100px] md:top-[50px] left-0 right-0 m-auto h-24 w-full px-4 md:w-[800px]">
-        <SearchBar
-          fetchPlacesByAddress={fetchPlacesByAddress}
-          fetchPlacesByCoordinates={fetchPlacesByCoordinates}
-        />
+        <SearchBar fetchPlacesByAddress={fetchPlacesByAddress} />
+      </div>
+
+      <div className="absolute flex justify-center items-center bottom-[30px] right-[20px] fill-transparent h-[80px] w-[80px]">
+        <UserLocationInput onSearch={fetchPlacesByCoordinates} />
       </div>
     </div>
   );

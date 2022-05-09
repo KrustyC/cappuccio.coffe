@@ -30,7 +30,7 @@ export async function fetchPlacesByCoordinates(
   client: MongoClient
 ) {
   const { lat, lng, radius } = options;
-  console.log(lat, lng);
+
   const places = await client
     .db(process.env.MONGO_DB_NAME)
     .collection(PLACES_COLLECTION)
@@ -44,8 +44,6 @@ export async function fetchPlacesByCoordinates(
       },
     })
     .toArray();
-
-  console.log(places);
 
   return places.map((place) => ({
     ...place,

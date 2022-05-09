@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getLocationFromBrowser } from "@/utils/browser";
 import { MarkerIcon } from "@/components/icons/Marker";
 import { Coordinates } from "@/types/global";
+import { useTrail, a } from "react-spring";
 
 interface UserLocationInputProps {
   onSearch: (coordinates: Coordinates) => void;
@@ -29,7 +30,16 @@ const LoadingIcon = () => (
 export const UserLocationInput: React.FC<UserLocationInputProps> = ({
   onSearch,
 }) => {
+  const [show, setShow] = useState(false);
   const [loadingUserPosition, setLoadingUserPosition] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShow(true);
+    }, 1500);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   const onGetLocationFromBrowser = async () => {
     setLoadingUserPosition(true);
@@ -44,17 +54,32 @@ export const UserLocationInput: React.FC<UserLocationInputProps> = ({
     setLoadingUserPosition(false);
   };
 
+  const trail = useTrail(1, {
+    config: { mass: 5, tension: 2000, friction: 200 },
+    opacity: show ? 1 : 0,
+    height: show ? 60 : 0,
+    from: { opacity: 0, height: 0 },
+  });
+
+  const { height: buttonHeight, ...buttonStyle } = trail[0];
+
   return (
-    <button
-      disabled={loadingUserPosition}
-      className="flex items-center bg-[#F055C3] justify-center w-[60px] h-[60px] border-2 border-[#F055C3] disabled:bg-[#DC82C2] rounded-full h-16 px-4 text-lg shadow-lg"
-      onClick={onGetLocationFromBrowser}
-    >
-      {loadingUserPosition ? (
-        <LoadingIcon />
-      ) : (
-        <MarkerIcon className="w-12 h-12 fill-[#FFFFFF]" />
-      )}
-    </button>
+    <div>
+      <a.div style={buttonStyle} className="flex-none w-[60px]">
+        <a.div style={{ height: buttonHeight }}>
+          <button
+            disabled={loadingUserPosition}
+            className="flex items-center bg-[#F055C3] justify-center w-[60px] h-[60px] border-2 border-[#F055C3] disabled:bg-[#DC82C2] rounded-full h-16 px-4 text-lg shadow-lg"
+            onClick={onGetLocationFromBrowser}
+          >
+            {loadingUserPosition ? (
+              <LoadingIcon />
+            ) : (
+              <MarkerIcon className="w-10 h-10 fill- text-white" />
+            )}
+          </button>
+        </a.div>
+      </a.div>
+    </div>
   );
 };
