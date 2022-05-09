@@ -1,9 +1,9 @@
 import { useNetlifyGetFunction } from "@/hooks/useNetlifyGetFunction";
 import { Place } from "@/types/global";
-import { MarkerIcon } from "@/components/icons/Marker";
 import { useUserLocation } from "@/hooks/useUserLocation";
 
 import dynamic from "next/dynamic";
+import { SearchBar } from "./SearchBar";
 
 const DynamicMap = dynamic(() => import("@/components/Map"), {
   ssr: false,
@@ -16,7 +16,6 @@ export const PlacesMap = () => {
   });
 
   const places = data?.places || [];
-
   const markers = places.map((place) => ({
     id: place._id,
     coordinates: place.address.coordinates,
@@ -32,17 +31,8 @@ export const PlacesMap = () => {
         markers={markers}
       />
 
-      <div className="absolute flex top-[100px] md:top-[50px] left-0 right-0 m-auto h-24 w-full px-4 md:w-7/12">
-        <input
-          className="w-full border-2 border-primary rounded-lg h-16 px-4 text-lg shadow-md mr-4"
-          placeholder="Where are you looking for cappuccino? Or use your current position if you prefer"
-        />
-        <button
-          className="flex items-center bg-[#F055C3] justify-center w-[60px] h-[60px] border-2 border-[#F055C3] rounded-full h-16 px-4 text-lg shadow-md"
-          onClick={getLocationFromBrowser}
-        >
-          <MarkerIcon className="w-12 h-12 fill-[#FFFFFF]" />
-        </button>
+      <div className="absolute flex top-[100px] md:top-[50px] left-0 right-0 m-auto h-24 w-full px-4 md:w-[800px]">
+        <SearchBar getLocationFromBrowser={getLocationFromBrowser} />
       </div>
     </div>
   );
