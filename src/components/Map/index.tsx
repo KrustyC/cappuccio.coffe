@@ -1,6 +1,5 @@
-import { MapContainer, Marker, useMap, TileLayer, Popup } from "react-leaflet";
+import { MapContainer, Marker, useMap, TileLayer } from "react-leaflet";
 import { Coordinates } from "@/types/global";
-// import { cappuccinoMarkerIcon } from "./icons";
 
 interface Marker {
   id: string;

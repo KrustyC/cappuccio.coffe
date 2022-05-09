@@ -20,9 +20,12 @@ const PlacePage: NextPage<PlacesPageProps> = ({ place }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="w-screen p-4">
+      <div className="w-screen md:p-4">
+        <div className="w-screen flex items-center px-4 h-24">
+          <span className="text-xl font-bold">cappuccio.coffee</span>
+        </div>
         <div className="w-full md:w-9/12 md:min-h-screen md:m-auto flex flex-col-reverse md:flex-row md:items-center md:justify-center">
-          <div className="w-full md:w-1/2 flex flex-col">
+          <div className="w-full mt-4 md:mt-0 px-4 md:px-0 md:w-1/2 flex flex-col">
             <span className="text-4xl md:text-6xl font-bold">{place.name}</span>
             <span className="text-xl mt-4">{parse(place.description)}</span>
           </div>

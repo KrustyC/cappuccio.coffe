@@ -10,7 +10,7 @@ const PlacePopup: React.FC<PlacePopupProps> = ({ place }) => {
   return (
     <Popup>
       <div className="flex flex-col w-[150px]">
-        <span className="text-xl bold">{place.name}</span>
+        <span className="text-xl font-bold">{place.name}</span>
         <Link href={`/places/${place._id}`}>
           <a>View</a>
         </Link>
