@@ -7,10 +7,10 @@ import { Address } from "@/types/global";
 
 export function useRetrieveAddressForward() {
   const { user } = useAuth();
-  const [suggestedPlaces, setSuggestedPlaces] = useState<Address[]>([]);
   const [searchAddress, setSearchAddress] = useState<string>("");
 
-  const [loading, setLoading] = useState(true);
+  const [suggestedPlaces, setSuggestedPlaces] = useState<Address[]>([]);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error>();
 
   useEffect(() => {

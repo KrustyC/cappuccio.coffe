@@ -39,7 +39,7 @@ export function usePlacesMap() {
     setError(undefined);
 
     try {
-      const radius = 5;
+      const radius = 5000;
       const url = `${BASE_PATH}?lat=${coordinates.lat}&lng=${coordinates.lng}&radius=${radius}`;
 
       const response = await fetchJson(url);

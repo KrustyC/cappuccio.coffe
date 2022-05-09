@@ -6,7 +6,7 @@ import { HTTP_METHODS } from "../shared/constants";
 import { fetchSinglePlace, fetchPlacesByCoordinates } from "../lib/places";
 import { fetchAddressesFromForwardAddress } from "../lib/geocode-api";
 
-const DEFAULT_RADIUS = 1000; // Radius in meters
+const DEFAULT_RADIUS = 3000; // Radius in meters
 
 interface QueryStringParameters {
   address?: string;

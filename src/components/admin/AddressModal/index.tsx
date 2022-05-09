@@ -63,7 +63,7 @@ export const AddressModal: React.FC<
 
           <button
             type="button"
-            className="btn-admin btn-primary mt-4 md:mt-0 md:ml-4 w-full"
+            className="btn-admin btn-primary mt-4 md:mt-0 md:ml-4 w-full md:w-40"
             onClick={() => onSearch(addressInput)}
           >
             Search
@@ -71,14 +71,14 @@ export const AddressModal: React.FC<
         </div>
       </div>
 
-      <div className="h-[550px] max-h-[550px] overflow-scroll pb-4">
+      <div className="h-[550px] md:max-h-[550px] md:overflow-scroll pb-4">
         {loading ? (
           <div className="h-24 flex align-center justify-center">
             <LoadingSpinner />
           </div>
         ) : (
-          <div className="flex flex-col mt-6">
-            <div className="md:w-1/2 flex flex-col mpr-8 w-full max-h-[490px] overflow-scroll">
+          <div className="flex flex-col md:flex-row mt-6">
+            <div className="md:w-1/2 flex flex-col md:pr-8 w-full md:max-h-[490px] md:overflow-scroll">
               {suggestedPlaces.map((place) => (
                 <div
                   key={uuidv4()}

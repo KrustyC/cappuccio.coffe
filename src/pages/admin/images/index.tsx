@@ -50,7 +50,7 @@ const AdminImages: NextPageWithLayout<undefined> = () => {
         it in its full size or delete it.
       </p>
 
-      <div className="grid grid-cols-4 gap-4 mt-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
         {loading ? (
           <LoadingSpinner />
         ) : (
