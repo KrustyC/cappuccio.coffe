@@ -55,7 +55,8 @@ const Map: React.FC<React.PropsWithChildren<MapProps>> = ({
           // icon={cappuccinoMarkerIcon}
           position={[marker.coordinates.lat, marker.coordinates.lng]}
         >
-          {marker.popup ? <Popup>{marker.popup}</Popup> : null}
+          {/* {marker.popup ? <Popup>{marker.popup}</Popup> : null} */}
+          {marker.popup}
         </Marker>
       ))}
     </MapContainer>

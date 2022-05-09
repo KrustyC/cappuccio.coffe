@@ -8,8 +8,8 @@ const nextConfig = {
   images: {
     domains: [
       "upload.wikimedia.org",
-      "beatricecox-dev.s3.amazonaws.com",
-      "beatricecox.s3.amazonaws.com",
+      "cappuccios-dev.s3.amazonaws.com",
+      "cappuccios.s3.amazonaws.com",
     ],
   },
 };

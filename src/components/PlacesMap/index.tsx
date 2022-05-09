@@ -8,6 +8,10 @@ const DynamicMap = dynamic(() => import("@/components/Map"), {
   ssr: false,
 });
 
+const DynamicPlacePopup = dynamic(() => import("./PlacePopup"), {
+  ssr: false,
+});
+
 export const PlacesMap = () => {
   const { center, places, fetchPlacesByAddress, fetchPlacesByCoordinates } =
     usePlacesMap();
@@ -15,7 +19,7 @@ export const PlacesMap = () => {
   const markers = places.map((place) => ({
     id: place._id,
     coordinates: place.address.coordinates,
-    popup: <div>{place.name}</div>,
+    popup: <DynamicPlacePopup place={place} />,
   }));
 
   return (
